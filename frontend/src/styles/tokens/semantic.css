@@ -1,0 +1,147 @@
+/* ============================================
+   Semantic Design Tokens - 大胆纯色系统
+   亮色/暗色主题语义化色彩定义
+   ============================================ */
+
+:root {
+  /* ========== 亮色主题 (Light Theme) ========== */
+  
+  /* 背景层级 - 纯净白色系 */
+  --background: oklch(0.98 0 0);              /* 纯净白 */
+  --background-subtle: oklch(0.96 0 0);
+  --background-muted: oklch(0.94 0 0);
+  --background-card: oklch(1 0 0);            /* 纯白卡片 */
+  --background-elevated: oklch(1 0 0);
+  --background-interactive: oklch(0.92 0 0);
+  
+  /* 文本层级 - 纯黑白 */
+  --foreground: oklch(0.10 0 0);              /* 纯黑前景 */
+  --foreground-muted: oklch(0.45 0 0);
+  --foreground-subtle: oklch(0.55 0 0);
+  --foreground-disabled: oklch(0.65 0 0);
+  --foreground-inverse: oklch(1 0 0);
+  
+  /* 边框 */
+  --border: oklch(0.88 0 0);
+  --border-muted: oklch(0.92 0 0);
+  --border-strong: oklch(0.80 0 0);
+  --border-focus: oklch(0.50 0.20 250);       /* 钴蓝聚焦 */
+  
+  /* 交互状态 */
+  --state-hover: oklch(0.94 0 0);
+  --state-active: oklch(0.90 0 0);
+  --state-focus-ring: oklch(0.50 0.20 250);   /* 钴蓝 */
+  --ring: oklch(0.50 0.20 250);
+  --ring-offset: var(--background);
+  
+  /* 主要强调色 - 黑白商务组合 */
+  --primary: oklch(0.15 0 0);                 /* 纯黑主色 */
+  --primary-foreground: oklch(1 0 0);         /* 白色文字 */
+  --secondary: oklch(0.94 0 0);               /* 浅灰次要 */
+  --secondary-foreground: oklch(0.15 0 0);
+  --accent: oklch(0.92 0 0);                  /* 浅灰强调 */
+  --accent-foreground: oklch(0.10 0 0);
+  --muted: oklch(0.93 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  
+  /* 语义颜色 - 黑白为主，状态色保留 */
+  --accent-primary: oklch(0.15 0 0);          /* 黑色 */
+  --accent-primary-hover: oklch(0.25 0 0);
+  --accent-primary-foreground: oklch(1 0 0);  /* 白色文字 */
+  --accent-success: oklch(0.55 0.18 155);     /* 翡翠绿 */
+  --accent-success-hover: oklch(0.50 0.20 155);
+  --accent-warning: oklch(0.70 0.18 70);      /* 琥珀橙 */
+  --accent-warning-hover: oklch(0.65 0.20 70);
+  --accent-error: oklch(0.55 0.22 25);        /* 朱红 */
+  --accent-error-hover: oklch(0.50 0.24 25);
+  --accent-info: oklch(0.50 0.20 250);        /* 钴蓝 */
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.55 0.18 155);
+  
+  /* 阴影 - 亮色主题 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.12), 0 4px 6px -2px rgba(0, 0, 0, 0.06);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  
+  /* 图表主题感知色 */
+  --chart-grid: oklch(0.80 0 0);
+  --chart-axis: oklch(0.40 0 0);
+  --chart-reference: oklch(0.30 0 0);
+  --chart-tooltip-bg: oklch(1 0 0);
+  --chart-tooltip-border: oklch(0.85 0 0);
+  --chart-tooltip-text: oklch(0.10 0 0);
+}
+
+/* ========== 暗色主题 (Dark Theme) ========== */
+.dark,
+[data-theme="dark"] {
+  /* 背景层级 - 纯净深黑 */
+  --background: oklch(0.08 0 0);              /* 深黑背景 */
+  --background-subtle: oklch(0.12 0 0);
+  --background-muted: oklch(0.16 0 0);
+  --background-card: oklch(0.10 0 0);         /* 卡片略亮 */
+  --background-elevated: oklch(0.14 0 0);
+  --background-interactive: oklch(0.18 0 0);
+  
+  /* 文本层级 - 纯白系 */
+  --foreground: oklch(0.98 0 0);              /* 纯白前景 */
+  --foreground-muted: oklch(0.70 0 0);
+  --foreground-subtle: oklch(0.55 0 0);
+  --foreground-disabled: oklch(0.40 0 0);
+  --foreground-inverse: oklch(0.08 0 0);
+  
+  /* 边框 */
+  --border: oklch(0.22 0 0);
+  --border-muted: oklch(0.18 0 0);
+  --border-strong: oklch(0.30 0 0);
+  --border-focus: oklch(0.60 0.18 250);       /* 钴蓝聚焦 */
+  
+  /* 交互状态 */
+  --state-hover: oklch(0.18 0 0);
+  --state-active: oklch(0.24 0 0);
+  --state-focus-ring: oklch(0.60 0.18 250);
+  --ring: oklch(0.60 0.18 250);
+  
+  /* 主要强调色 - 黑白商务组合 (暗色模式) */
+  --primary: oklch(0.95 0 0);                 /* 纯白主色 */
+  --primary-foreground: oklch(0.08 0 0);
+  --secondary: oklch(0.20 0 0);               /* 深灰次要 */
+  --secondary-foreground: oklch(0.95 0 0);
+  --accent: oklch(0.25 0 0);                  /* 深灰强调 */
+  --accent-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.25 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+  
+  /* 语义颜色 - 黑白为主，状态色保留 (暗色模式) */
+  --accent-primary: oklch(0.95 0 0);          /* 白色 */
+  --accent-primary-hover: oklch(0.85 0 0);
+  --accent-primary-foreground: oklch(0.08 0 0); /* 黑色文字 */
+  --accent-success: oklch(0.60 0.16 155);     /* 翡翠绿 */
+  --accent-success-hover: oklch(0.65 0.14 155);
+  --accent-warning: oklch(0.75 0.16 70);      /* 琥珀橙 */
+  --accent-warning-hover: oklch(0.80 0.14 70);
+  --accent-error: oklch(0.60 0.22 25);        /* 朱红 */
+  --accent-error-hover: oklch(0.65 0.20 25);
+  --accent-info: oklch(0.60 0.18 250);        /* 钴蓝 */
+  --destructive: oklch(0.60 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.60 0.16 155);
+  
+  /* 阴影 - 暗色主题 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  
+  /* 图表主题感知色 */
+  --chart-grid: oklch(0.22 0 0);
+  --chart-axis: oklch(0.65 0 0);
+  --chart-reference: oklch(0.75 0 0);
+  --chart-tooltip-bg: oklch(0.12 0 0);
+  --chart-tooltip-border: oklch(0.25 0 0);
+  --chart-tooltip-text: oklch(0.98 0 0);
+}

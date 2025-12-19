@@ -1,0 +1,348 @@
+/* ============================================
+   Global Styles - Alpha Arena Design System
+   包含艺术字体、主题过渡、动画效果
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Audiowide&family=Righteous&display=swap');
+
+@import './tokens/primitives.css';
+@import './tokens/semantic.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========== 字体CSS变量映射 ========== */
+:root {
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-orbitron: 'Orbitron', sans-serif;
+  --font-bebas: 'Bebas Neue', sans-serif;
+  --font-rajdhani: 'Rajdhani', sans-serif;
+  --font-audiowide: 'Audiowide', sans-serif;
+  --font-righteous: 'Righteous', sans-serif;
+}
+
+@layer base {
+  /* ========== 主题平滑过渡 ========== */
+  html, body, * {
+    transition: 
+      background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+      fill 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+      stroke 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* 交互元素保持快速响应 */
+  button, a, input, textarea, select {
+    transition: 
+      all 0.3s ease,
+      background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-color: var(--border);
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: var(--font-semibold);
+    color: var(--foreground);
+    letter-spacing: -0.02em;
+  }
+
+  h1 { font-size: var(--text-4xl); }
+  h2 { font-size: var(--text-3xl); }
+  h3 { font-size: var(--text-2xl); }
+  h4 { font-size: var(--text-xl); }
+  h5 { font-size: var(--text-lg); }
+  h6 { font-size: var(--text-base); }
+
+  p {
+    color: var(--foreground-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out-cubic);
+  }
+
+  a:hover {
+    color: var(--accent-primary-hover);
+  }
+
+  code, pre {
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background-color: var(--accent-primary);
+    color: var(--foreground-inverse);
+  }
+
+  /* ========== 主题感知滚动条 ========== */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: oklch(0.92 0.005 270);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.65 0.01 270);
+    border-radius: var(--radius-full);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.55 0.012 270);
+  }
+
+  /* 暗色主题滚动条 */
+  .dark ::-webkit-scrollbar-track {
+    background: oklch(0.18 0.01 270);
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: oklch(0.45 0.015 270);
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.55 0.018 270);
+  }
+}
+
+/* ========== View Transitions API ========== */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2; }
+
+::view-transition-group(root) {
+  animation-duration: 0s;
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .glass-dark {
+    background: rgba(24, 24, 27, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--silver-100) 25%,
+      var(--silver-200) 50%,
+      var(--silver-100) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  .focus-ring {
+    outline: none;
+  }
+
+  .focus-ring:focus-visible {
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-4);
+    width: 100%;
+    min-height: calc(100vh - 64px);
+  }
+
+  @media (max-width: 1280px) {
+    .bento-grid {
+      grid-template-columns: repeat(8, 1fr);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .bento-grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .bento-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@layer utilities {
+  /* ========== 艺术字体工具类 ========== */
+  .font-display { font-family: var(--font-serif); }
+  .font-tech { font-family: var(--font-orbitron); }
+  .font-impact { font-family: var(--font-bebas); letter-spacing: 0.05em; }
+  .font-geometric { font-family: var(--font-rajdhani); }
+  .font-electronic { font-family: var(--font-audiowide); }
+  .font-bold-art { font-family: var(--font-righteous); }
+
+  .text-gradient {
+    background: var(--gradient-premium);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animate-in {
+    animation: fadeIn var(--duration-normal) var(--ease-out-cubic);
+  }
+
+  .slide-up {
+    animation: slideUp var(--duration-normal) var(--ease-out-cubic);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ========== 关键帧动画 ========== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.9;
+    filter: 
+      drop-shadow(0 0 2px oklch(0.6 0.15 240 / 0.6))
+      drop-shadow(0 0 4px oklch(0.6 0.15 240 / 0.4))
+      drop-shadow(0 0 8px oklch(0.6 0.15 240 / 0.2));
+  }
+}
+
+@keyframes chart-fade-in {
+  from { opacity: 0; transform: scale(0.98) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes chart-fade-out {
+  from { opacity: 1; transform: scale(1) translateY(0); }
+  to { opacity: 0; transform: scale(0.98) translateY(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 oklch(0.6 0.15 240 / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px oklch(0.6 0.15 240 / 0.1);
+  }
+}
+
+/* ========== 卡片渐变扫光效果 ========== */
+.model-card-gradient {
+  position: relative;
+  overflow: hidden;
+}
+
+.model-card-gradient::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(130, 130, 255, 0.15) 50%,
+    rgba(180, 130, 255, 0.2) 60%,
+    transparent 100%
+  );
+  transition: left 0.8s ease;
+  pointer-events: none;
+}
+
+.model-card-gradient:hover::after {
+  left: 100%;
+}
+
+.dark .model-card-gradient::after {
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(200, 200, 255, 0.12) 50%,
+    rgba(220, 200, 255, 0.18) 60%,
+    transparent 100%
+  );
+}

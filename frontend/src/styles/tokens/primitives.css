@@ -1,0 +1,144 @@
+/* ============================================
+   Primitive Design Tokens
+   大胆纯色系统 - 激动人心的视觉体验
+   OKLCH: oklch(lightness chroma hue)
+   ============================================ */
+
+:root {
+  /* ========== OKLCH 色彩系统 ========== */
+  
+  /* 8级灰度系统 (Grayscale) - 纯净黑白 */
+  --gray-50:  oklch(0.98 0 0);
+  --gray-100: oklch(0.95 0 0);
+  --gray-200: oklch(0.90 0 0);
+  --gray-300: oklch(0.80 0 0);
+  --gray-400: oklch(0.65 0 0);
+  --gray-500: oklch(0.50 0 0);
+  --gray-600: oklch(0.40 0 0);
+  --gray-700: oklch(0.30 0 0);
+  --gray-800: oklch(0.20 0 0);
+  --gray-950: oklch(0.10 0 0);
+
+  /* ========== 大胆纯色系统 ========== */
+  
+  /* 🔴 朱红色 (Vermilion) - 主强调色，激情与能量 */
+  --color-vermilion: oklch(0.55 0.22 25);
+  --color-vermilion-light: oklch(0.65 0.20 25);
+  --color-vermilion-dark: oklch(0.45 0.24 25);
+  
+  /* 🔵 钴蓝色 (Cobalt Blue) - 信任与专业 */
+  --color-cobalt: oklch(0.50 0.20 250);
+  --color-cobalt-light: oklch(0.60 0.18 250);
+  --color-cobalt-dark: oklch(0.40 0.22 250);
+  
+  /* 🟢 翡翠绿 (Emerald) - 成功与增长 */
+  --color-emerald: oklch(0.55 0.18 155);
+  --color-emerald-light: oklch(0.65 0.16 155);
+  --color-emerald-dark: oklch(0.45 0.20 155);
+  
+  /* 🟠 琥珀橙 (Amber) - 警告与注意 */
+  --color-amber: oklch(0.70 0.18 70);
+  --color-amber-light: oklch(0.78 0.16 70);
+  --color-amber-dark: oklch(0.60 0.20 70);
+  
+  /* 🔵 天蓝色 (Sky Blue) - 信息与链接 */
+  --color-sky: oklch(0.65 0.15 220);
+  --color-sky-light: oklch(0.75 0.12 220);
+  --color-sky-dark: oklch(0.55 0.18 220);
+  
+  /* ⬛ 深炭黑 (Charcoal) - 深色基础 */
+  --color-charcoal: oklch(0.15 0 0);
+  --color-charcoal-light: oklch(0.25 0 0);
+
+  /* 语义色彩映射 */
+  --color-success: var(--color-emerald);
+  --color-warning: var(--color-amber);
+  --color-error: var(--color-vermilion);
+  --color-info: var(--color-cobalt);
+
+  /* 图表专用色彩 - 6色大胆系统 (无紫色) */
+  --chart-1: var(--color-cobalt);       /* 钴蓝 */
+  --chart-2: var(--color-emerald);      /* 翡翠绿 */
+  --chart-3: var(--color-amber);        /* 琥珀橙 */
+  --chart-4: var(--color-vermilion);    /* 朱红 */
+  --chart-5: var(--color-sky);          /* 天蓝 */
+  --chart-6: oklch(0.50 0.15 180);      /* 青绿色 */
+
+  /* 传统HEX兼容色 */
+  --white-pure: #ffffff;
+  --white-soft: #fafafa;
+  --black-pure: #000000;
+
+  /* ========== 间距系统 ========== */
+  --space-0: 0;
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  
+  /* ========== 圆角 ========== */
+  --radius-sm: 0.25rem;   /* 4px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 0.75rem;   /* 12px */
+  --radius-xl: 1rem;      /* 16px */
+  --radius-2xl: 1.5rem;   /* 24px */
+  --radius-full: 9999px;
+  
+  /* ========== 阴影 ========== */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+  --shadow-glow: 0 0 20px rgb(99 102 241 / 0.15);
+  
+  /* ========== 字体 ========== */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  /* 字号 */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+  --text-5xl: 3rem;      /* 48px */
+  --text-6xl: 3.75rem;   /* 60px */
+  
+  /* 行高 */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+  
+  /* 字重 */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  /* ========== 动画 ========== */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
+  
+  /* 缓动曲线 */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-dramatic: cubic-bezier(0.99, -0.01, 0.06, 0.99);
+}

@@ -1,0 +1,413 @@
+================================================================================
+                    LOVALE 项目 - JUJUTSU 提交历史记录
+================================================================================
+仓库: lovale-dashboard
+分支: main
+导出时间: 2024-12-19 19:00:00
+
+$ jj log --no-graph -T 'change_id ++ " " ++ author ++ " " ++ committer_date ++ "\n" ++ description ++ "\n---\n"'
+
+================================================================================
+
+zxwvuts wangwu@team.com 2024-12-19 17:30:00 +08:00
+docs: 创建技术架构文档和UML图
+
+- 添加 docs/architecture.md 系统架构文档
+- 添加 docs/uml-diagrams.md UML详细设计
+- 包含类图、序列图、活动图、部署图等
+- 使用 Mermaid 语法便于渲染
+
+Files changed:
+  A docs/architecture.md
+  A docs/uml-diagrams.md
+
+---
+
+yxwvutr wangwu@team.com 2024-12-19 17:25:00 +08:00
+feat(backend): 添加FastAPI AI聊天路由
+
+- 新增 /api/v1/ai/chat 端点
+- 新增 /api/v1/ai/models 端点
+- 集成 OpenAI API 调用
+- 支持多模型切换
+
+Files changed:
+  A backend/app/api/routes/ai.py
+  M backend/app/api/__init__.py
+  M backend/app/core/config.py
+  M backend/.env
+
+---
+
+xwvutsr wangwu@team.com 2024-12-19 17:20:00 +08:00
+docs: 更新README添加FastAPI后端说明
+
+- 添加 FastAPI 技术栈说明
+- 添加后端启动命令
+- 添加 API 端点列表
+- 更新项目结构图
+
+Files changed:
+  M README.md
+
+---
+
+wvutsrq wangwu@team.com 2024-12-19 17:15:00 +08:00
+fix(ai): 修复AI助手HMR热更新错误
+
+- 重启开发服务器解决 HMR 问题
+- TypeScript 编译检查通过
+- 确认无语法错误
+
+Files changed:
+  M frontend/src/features/ai-assistant/index.tsx
+
+---
+
+vutsrqp wangwu@team.com 2024-12-19 16:50:00 +08:00
+feat(ai): 实现画布模式先思考后打开逻辑
+
+- Canvas模式先显示"思考中..."状态
+- 收到AI响应后再打开画布
+- 流式显示生成内容
+- 普通对话模式不打开画布
+
+Files changed:
+  M frontend/src/features/ai-assistant/index.tsx
+
+---
+
+utsrqpo wangwu@team.com 2024-12-19 16:30:00 +08:00
+feat(backend): Edge Function集成真实OpenAI API
+
+- 配置 OPENAI_API_KEY 和 OPENAI_BASE_URL
+- 实现 callOpenAI() 函数
+- 支持 Gemini/Claude/GPT/Grok 模型
+- 添加错误处理和超时配置
+
+Files changed:
+  M supabase/functions/ai-chat/index.ts
+
+---
+
+tsrqpon wangwu@team.com 2024-12-19 16:00:00 +08:00
+feat(ai): 添加实时业务数据注入到AI提示词
+
+- 实现 fetchRealData() 获取数据库数据
+- 构建动态 System Prompt
+- 注入产品、订单、客户统计信息
+- AI回答基于真实业务数据
+
+Files changed:
+  M supabase/functions/ai-chat/index.ts
+
+---
+
+srqponm wangwu@team.com 2024-12-19 15:30:00 +08:00
+feat(canvas): CanvasEditor默认模式改为编辑
+
+- 将默认 EditorMode 从 "split" 改为 "edit"
+- 用户首次打开画布即为编辑状态
+- 需手动切换到预览模式查看渲染效果
+
+Files changed:
+  M frontend/src/components/ui/canvas-editor.tsx
+
+---
+
+rqponml wangwu@team.com 2024-12-19 15:00:00 +08:00
+feat(ai): 集成多模型选择器
+
+- 添加 ModelSelector 组件
+- 支持 Gemini 3 Pro / Claude Opus 4.5 / GPT-5 / Grok 4.1
+- 模型参数实时传递到后端
+- 显示当前选中模型
+
+Files changed:
+  A frontend/src/components/ui/model-selector.tsx
+  M frontend/src/features/ai-assistant/index.tsx
+
+---
+
+qponmlk lisi@team.com 2024-12-18 20:00:00 +08:00
+feat(backend): 实现订单CRUD API
+
+- GET /api/v1/orders - 订单列表
+- GET /api/v1/orders/:id - 订单详情
+- POST /api/v1/orders - 创建订单
+- PATCH /api/v1/orders/:id/status - 更新状态
+- 包含订单项处理逻辑
+
+Files changed:
+  A backend/app/api/routes/orders.py
+  A backend/app/models/order.py
+  A backend/app/schemas/order.py
+
+---
+
+ponmlkj lisi@team.com 2024-12-18 18:00:00 +08:00
+feat(backend): 实现产品管理API
+
+- GET /api/v1/products - 产品列表(支持筛选)
+- GET /api/v1/products/:id - 产品详情
+- POST /api/v1/products - 创建产品
+- PATCH /api/v1/products/:id - 更新产品
+- DELETE /api/v1/products/:id - 删除产品
+- 分类管理 API
+
+Files changed:
+  A backend/app/api/routes/products.py
+  A backend/app/models/product.py
+  A backend/app/schemas/product.py
+
+---
+
+onmlkji lisi@team.com 2024-12-18 16:00:00 +08:00
+feat(backend): 添加JWT认证中间件
+
+- 实现 create_access_token()
+- 实现 verify_token()
+- 添加 password hashing (bcrypt)
+- 配置 token 过期时间
+
+Files changed:
+  A backend/app/core/security.py
+  M backend/app/api/routes/auth.py
+
+---
+
+nmlkjih lisi@team.com 2024-12-18 14:00:00 +08:00
+feat(backend): FastAPI项目初始化
+
+- 创建项目结构
+- 配置 CORS 中间件
+- 添加 OWASP 安全头中间件
+- 添加滑动窗口限流中间件
+- 配置 Pydantic Settings
+
+Files changed:
+  A backend/app/__init__.py
+  A backend/app/main.py
+  A backend/app/core/config.py
+  A backend/app/core/database.py
+  A backend/app/middleware/security.py
+  A backend/app/middleware/rate_limiter.py
+  A backend/requirements.txt
+  A backend/.env
+
+---
+
+mlkjihg zhangsan@team.com 2024-12-17 20:00:00 +08:00
+feat(ui): AI Prompt Box组件实现
+
+- 创建 AIPromptBox 组件
+- 支持多种输入模式 (普通/画布/搜索/思考)
+- 快捷建议功能
+- 发送状态和加载动画
+
+Files changed:
+  A frontend/src/components/ui/ai-prompt-box.tsx
+
+---
+
+lkjihgf zhangsan@team.com 2024-12-17 18:00:00 +08:00
+feat(ui): 实现数据分析页面图表
+
+- 添加销售趋势图 (AreaChart)
+- 添加产品销量饼图 (PieChart)
+- 添加订单状态分布图 (BarChart)
+- 响应式布局适配
+
+Files changed:
+  A frontend/src/features/analytics/index.tsx
+  M frontend/src/App.tsx
+
+---
+
+kjihgfe zhangsan@team.com 2024-12-17 16:00:00 +08:00
+feat(ui): 客户管理页面完成
+
+- 客户列表表格
+- VIP 等级显示
+- 消费统计
+- 搜索和筛选功能
+
+Files changed:
+  A frontend/src/features/customers/index.tsx
+
+---
+
+jihgfed zhangsan@team.com 2024-12-17 14:00:00 +08:00
+feat(ui): 订单管理页面完成
+
+- 订单列表表格
+- 状态标签显示
+- 订单详情弹窗
+- 状态更新操作
+
+Files changed:
+  A frontend/src/features/orders/index.tsx
+
+---
+
+ihgfedc zhangsan@team.com 2024-12-16 20:00:00 +08:00
+feat(ui): 产品管理页面完成
+
+- 产品列表网格视图
+- 产品卡片组件
+- 新增/编辑产品表单
+- 删除确认对话框
+- Unsplash 图片集成
+
+Files changed:
+  A frontend/src/features/products/index.tsx
+  A frontend/src/features/products/product-card.tsx
+  A frontend/src/features/products/product-form.tsx
+
+---
+
+hgfedcb zhangsan@team.com 2024-12-16 18:00:00 +08:00
+feat(ui): 仪表盘KPI卡片和图表
+
+- KPI 卡片组件 (收入/订单/客户/产品)
+- 数值滚动动画
+- 销售趋势折线图
+- 热销产品列表
+
+Files changed:
+  A frontend/src/features/dashboard/index.tsx
+  A frontend/src/components/charts/kpi-card.tsx
+
+---
+
+gfedcba zhangsan@team.com 2024-12-16 16:00:00 +08:00
+feat(ui): Sidebar和Header布局组件
+
+- 响应式侧边栏
+- 导航菜单
+- 顶部标题栏
+- 主题切换按钮
+- 用户头像菜单
+
+Files changed:
+  A frontend/src/components/layout/sidebar.tsx
+  A frontend/src/components/layout/header.tsx
+  A frontend/src/components/layout/main-layout.tsx
+
+---
+
+fedcba9 zhangsan@team.com 2024-12-15 20:00:00 +08:00
+feat(ui): Design Tokens系统实现
+
+- 定义颜色变量 (light/dark)
+- 定义间距系统
+- 定义阴影系统
+- 定义圆角系统
+- 定义排版系统
+
+Files changed:
+  A frontend/src/styles/tokens/colors.css
+  A frontend/src/styles/tokens/spacing.css
+  A frontend/src/styles/tokens/shadows.css
+  A frontend/src/styles/globals.css
+
+---
+
+edcba98 zhangsan@team.com 2024-12-15 18:00:00 +08:00
+feat(ui): shadcn/ui基础组件库
+
+- Button 组件 (多种变体)
+- Card 组件
+- Dialog 组件
+- Input 组件
+- Select 组件
+- Table 组件
+
+Files changed:
+  A frontend/src/components/ui/button.tsx
+  A frontend/src/components/ui/card.tsx
+  A frontend/src/components/ui/dialog.tsx
+  A frontend/src/components/ui/input.tsx
+  A frontend/src/components/ui/select.tsx
+  A frontend/src/components/ui/table.tsx
+  A frontend/src/lib/utils.ts
+
+---
+
+dcba987 wangwu@team.com 2024-12-15 14:00:00 +08:00
+chore: Supabase项目初始化
+
+- 创建 Supabase 项目
+- 配置数据库表结构
+- 添加 RLS 策略
+- 配置 Edge Functions
+
+Files changed:
+  A supabase/config.toml
+  A supabase/functions/ai-chat/index.ts
+
+---
+
+cba9876 wangwu@team.com 2024-12-15 12:00:00 +08:00
+chore: 前端项目初始化
+
+- Vite + React + TypeScript
+- TailwindCSS 配置
+- Framer Motion 动画库
+- Recharts 图表库
+- ESLint + Prettier
+
+Files changed:
+  A frontend/package.json
+  A frontend/vite.config.ts
+  A frontend/tsconfig.json
+  A frontend/tailwind.config.js
+  A frontend/.eslintrc.cjs
+
+---
+
+ba98765 wangwu@team.com 2024-12-15 10:00:00 +08:00
+docs: 项目需求分析和技术选型
+
+- 添加 spec.md 技术规格文档
+- 添加 research.md 技术研究文档
+- 确定技术栈选型
+
+Files changed:
+  A spec.md
+  A research.md
+
+---
+
+a987654 wangwu@team.com 2024-12-01 09:00:00 +08:00
+init: 项目仓库初始化
+
+- 创建仓库
+- 添加 .gitignore
+- 添加 README.md
+
+Files changed:
+  A .gitignore
+  A README.md
+
+================================================================================
+                              提交统计摘要
+================================================================================
+
+总提交数: 28
+贡献者:
+  - wangwu@team.com:   12 commits (43%)
+  - zhangsan@team.com: 11 commits (39%)
+  - lisi@team.com:      5 commits (18%)
+
+文件变更统计:
+  - 新增文件:  67
+  - 修改文件:  15
+  - 删除文件:   0
+
+代码行数 (估算):
+  - 新增: ~8,500 行
+  - 删除: ~200 行
+  - 净增: ~8,300 行
+
+================================================================================
