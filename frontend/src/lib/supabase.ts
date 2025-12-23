@@ -185,6 +185,15 @@ export const api = {
       if (error) throw error;
       return data as Order[];
     },
+    async getById(id: string) {
+      const { data, error } = await supabase
+        .from('orders')
+        .select('*')
+        .eq('id', id)
+        .single();
+      if (error) throw error;
+      return data as Order;
+    },
     async getRecent(limit: number = 5) {
       const { data, error } = await supabase
         .from('orders')
@@ -202,6 +211,32 @@ export const api = {
         .order('created_at', { ascending: false });
       if (error) throw error;
       return data as Order[];
+    },
+    async create(order: Omit<Order, 'id' | 'created_at' | 'updated_at'>) {
+      const { data, error } = await supabase
+        .from('orders')
+        .insert(order)
+        .select()
+        .single();
+      if (error) throw error;
+      return data as Order;
+    },
+    async update(id: string, order: Partial<Order>) {
+      const { data, error } = await supabase
+        .from('orders')
+        .update({ ...order, updated_at: new Date().toISOString() })
+        .eq('id', id)
+        .select()
+        .single();
+      if (error) throw error;
+      return data as Order;
+    },
+    async delete(id: string) {
+      const { error } = await supabase
+        .from('orders')
+        .delete()
+        .eq('id', id);
+      if (error) throw error;
     }
   },
 

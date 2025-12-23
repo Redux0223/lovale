@@ -159,6 +159,8 @@ export function RegisterPage() {
   const [isPurpleBlinking, setIsPurpleBlinking] = useState(false);
   const [isBlackBlinking, setIsBlackBlinking] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [isLookingAtEachOther, setIsLookingAtEachOther] = useState(false);
+  const [isPurplePeeking, setIsPurplePeeking] = useState(false);
   const purpleRef = useRef<HTMLDivElement>(null);
   const blackRef = useRef<HTMLDivElement>(null);
   const yellowRef = useRef<HTMLDivElement>(null);
@@ -204,6 +206,36 @@ export function RegisterPage() {
     const timeout = scheduleBlink();
     return () => clearTimeout(timeout);
   }, []);
+
+  useEffect(() => {
+    if (isTyping) {
+      setIsLookingAtEachOther(true);
+      const timer = setTimeout(() => {
+        setIsLookingAtEachOther(false);
+      }, 800);
+      return () => clearTimeout(timer);
+    } else {
+      setIsLookingAtEachOther(false);
+    }
+  }, [isTyping]);
+
+  useEffect(() => {
+    if (password.length > 0 && !showPassword) {
+      const schedulePeek = () => {
+        const peekInterval = setTimeout(() => {
+          setIsPurplePeeking(true);
+          setTimeout(() => {
+            setIsPurplePeeking(false);
+          }, 800);
+        }, Math.random() * 3000 + 2000);
+        return peekInterval;
+      };
+      const firstPeek = schedulePeek();
+      return () => clearTimeout(firstPeek);
+    } else {
+      setIsPurplePeeking(false);
+    }
+  }, [password, showPassword, isPurplePeeking]);
 
   const calculatePosition = (ref: React.RefObject<HTMLDivElement | null>) => {
     if (!ref.current) return { faceX: 0, faceY: 0, bodySkew: 0 };
@@ -292,23 +324,45 @@ export function RegisterPage() {
               style={{
                 left: '70px',
                 width: '180px',
-                height: isTyping ? '440px' : '400px',
+                height: (isTyping || (password.length > 0 && showPassword)) ? '440px' : '400px',
                 backgroundColor: '#6C3FF5',
                 borderRadius: '10px 10px 0 0',
                 zIndex: 1,
-                transform: isTyping ? `skewX(${(purplePos.bodySkew || 0) - 8}deg) translateX(20px)` : `skewX(${purplePos.bodySkew || 0}deg)`,
+                transform: (password.length > 0 && !showPassword)
+                  ? `skewX(0deg)` 
+                  : (isTyping || (password.length > 0 && showPassword))
+                    ? `skewX(${(purplePos.bodySkew || 0) - 12}deg) translateX(40px)` 
+                    : `skewX(${purplePos.bodySkew || 0}deg)`,
                 transformOrigin: 'bottom center',
               }}
             >
               <div 
                 className="absolute flex gap-8 transition-all duration-700 ease-in-out"
                 style={{
-                  left: `${45 + purplePos.faceX}px`,
-                  top: `${40 + purplePos.faceY}px`,
+                  left: (password.length > 0 && !showPassword) ? `${20}px` : isLookingAtEachOther ? `${55}px` : `${45 + purplePos.faceX}px`,
+                  top: (password.length > 0 && !showPassword) ? `${35}px` : isLookingAtEachOther ? `${65}px` : `${40 + purplePos.faceY}px`,
                 }}
               >
-                <EyeBall size={18} pupilSize={7} maxDistance={5} eyeColor="white" pupilColor="#2D2D2D" isBlinking={isPurpleBlinking} />
-                <EyeBall size={18} pupilSize={7} maxDistance={5} eyeColor="white" pupilColor="#2D2D2D" isBlinking={isPurpleBlinking} />
+                <EyeBall 
+                  size={18} 
+                  pupilSize={7} 
+                  maxDistance={5} 
+                  eyeColor="white" 
+                  pupilColor="#2D2D2D" 
+                  isBlinking={isPurpleBlinking}
+                  forceLookX={(password.length > 0 && !showPassword) ? (isPurplePeeking ? 4 : -4) : isLookingAtEachOther ? 3 : undefined}
+                  forceLookY={(password.length > 0 && !showPassword) ? (isPurplePeeking ? 5 : -4) : isLookingAtEachOther ? 4 : undefined}
+                />
+                <EyeBall 
+                  size={18} 
+                  pupilSize={7} 
+                  maxDistance={5} 
+                  eyeColor="white" 
+                  pupilColor="#2D2D2D" 
+                  isBlinking={isPurpleBlinking}
+                  forceLookX={(password.length > 0 && !showPassword) ? (isPurplePeeking ? 4 : -4) : isLookingAtEachOther ? 3 : undefined}
+                  forceLookY={(password.length > 0 && !showPassword) ? (isPurplePeeking ? 5 : -4) : isLookingAtEachOther ? 4 : undefined}
+                />
               </div>
             </div>
 
@@ -323,19 +377,43 @@ export function RegisterPage() {
                 backgroundColor: '#2D2D2D',
                 borderRadius: '8px 8px 0 0',
                 zIndex: 2,
-                transform: `skewX(${blackPos.bodySkew || 0}deg)`,
+                transform: (password.length > 0 && !showPassword)
+                  ? `skewX(0deg)` 
+                  : isLookingAtEachOther
+                    ? `skewX(${(blackPos.bodySkew || 0) * 1.5 + 10}deg) translateX(20px)` 
+                    : (isTyping || (password.length > 0 && showPassword))
+                      ? `skewX(${(blackPos.bodySkew || 0) * 1.5}deg)` 
+                      : `skewX(${blackPos.bodySkew || 0}deg)`,
                 transformOrigin: 'bottom center',
               }}
             >
               <div 
                 className="absolute flex gap-6 transition-all duration-700 ease-in-out"
                 style={{
-                  left: `${26 + blackPos.faceX}px`,
-                  top: `${32 + blackPos.faceY}px`,
+                  left: (password.length > 0 && !showPassword) ? `${10}px` : isLookingAtEachOther ? `${32}px` : `${26 + blackPos.faceX}px`,
+                  top: (password.length > 0 && !showPassword) ? `${28}px` : isLookingAtEachOther ? `${12}px` : `${32 + blackPos.faceY}px`,
                 }}
               >
-                <EyeBall size={16} pupilSize={6} maxDistance={4} eyeColor="white" pupilColor="#2D2D2D" isBlinking={isBlackBlinking} />
-                <EyeBall size={16} pupilSize={6} maxDistance={4} eyeColor="white" pupilColor="#2D2D2D" isBlinking={isBlackBlinking} />
+                <EyeBall 
+                  size={16} 
+                  pupilSize={6} 
+                  maxDistance={4} 
+                  eyeColor="white" 
+                  pupilColor="#2D2D2D" 
+                  isBlinking={isBlackBlinking}
+                  forceLookX={(password.length > 0 && !showPassword) ? -4 : isLookingAtEachOther ? 0 : undefined}
+                  forceLookY={(password.length > 0 && !showPassword) ? -4 : isLookingAtEachOther ? -4 : undefined}
+                />
+                <EyeBall 
+                  size={16} 
+                  pupilSize={6} 
+                  maxDistance={4} 
+                  eyeColor="white" 
+                  pupilColor="#2D2D2D" 
+                  isBlinking={isBlackBlinking}
+                  forceLookX={(password.length > 0 && !showPassword) ? -4 : isLookingAtEachOther ? 0 : undefined}
+                  forceLookY={(password.length > 0 && !showPassword) ? -4 : isLookingAtEachOther ? -4 : undefined}
+                />
               </div>
             </div>
 
@@ -350,19 +428,19 @@ export function RegisterPage() {
                 zIndex: 3,
                 backgroundColor: '#FF9B6B',
                 borderRadius: '120px 120px 0 0',
-                transform: `skewX(${orangePos.bodySkew || 0}deg)`,
+                transform: (password.length > 0 && !showPassword) ? `skewX(0deg)` : `skewX(${orangePos.bodySkew || 0}deg)`,
                 transformOrigin: 'bottom center',
               }}
             >
               <div 
                 className="absolute flex gap-8 transition-all duration-200 ease-out"
                 style={{
-                  left: `${82 + (orangePos.faceX || 0)}px`,
-                  top: `${90 + (orangePos.faceY || 0)}px`,
+                  left: (password.length > 0 && !showPassword) ? `${50}px` : `${82 + (orangePos.faceX || 0)}px`,
+                  top: (password.length > 0 && !showPassword) ? `${85}px` : `${90 + (orangePos.faceY || 0)}px`,
                 }}
               >
-                <Pupil size={12} maxDistance={5} pupilColor="#2D2D2D" />
-                <Pupil size={12} maxDistance={5} pupilColor="#2D2D2D" />
+                <Pupil size={12} maxDistance={5} pupilColor="#2D2D2D" forceLookX={(password.length > 0 && !showPassword) ? -5 : undefined} forceLookY={(password.length > 0 && !showPassword) ? -4 : undefined} />
+                <Pupil size={12} maxDistance={5} pupilColor="#2D2D2D" forceLookX={(password.length > 0 && !showPassword) ? -5 : undefined} forceLookY={(password.length > 0 && !showPassword) ? -4 : undefined} />
               </div>
             </div>
 
@@ -377,25 +455,25 @@ export function RegisterPage() {
                 backgroundColor: '#E8D754',
                 borderRadius: '70px 70px 0 0',
                 zIndex: 4,
-                transform: `skewX(${yellowPos.bodySkew || 0}deg)`,
+                transform: (password.length > 0 && !showPassword) ? `skewX(0deg)` : `skewX(${yellowPos.bodySkew || 0}deg)`,
                 transformOrigin: 'bottom center',
               }}
             >
               <div 
                 className="absolute flex gap-6 transition-all duration-200 ease-out"
                 style={{
-                  left: `${52 + (yellowPos.faceX || 0)}px`,
-                  top: `${40 + (yellowPos.faceY || 0)}px`,
+                  left: (password.length > 0 && !showPassword) ? `${20}px` : `${52 + (yellowPos.faceX || 0)}px`,
+                  top: (password.length > 0 && !showPassword) ? `${35}px` : `${40 + (yellowPos.faceY || 0)}px`,
                 }}
               >
-                <Pupil size={12} maxDistance={5} pupilColor="#2D2D2D" />
-                <Pupil size={12} maxDistance={5} pupilColor="#2D2D2D" />
+                <Pupil size={12} maxDistance={5} pupilColor="#2D2D2D" forceLookX={(password.length > 0 && !showPassword) ? -5 : undefined} forceLookY={(password.length > 0 && !showPassword) ? -4 : undefined} />
+                <Pupil size={12} maxDistance={5} pupilColor="#2D2D2D" forceLookX={(password.length > 0 && !showPassword) ? -5 : undefined} forceLookY={(password.length > 0 && !showPassword) ? -4 : undefined} />
               </div>
               <div 
                 className="absolute w-20 h-[4px] bg-[#2D2D2D] rounded-full transition-all duration-200 ease-out"
                 style={{
-                  left: `${40 + (yellowPos.faceX || 0)}px`,
-                  top: `${88 + (yellowPos.faceY || 0)}px`,
+                  left: (password.length > 0 && !showPassword) ? `${10}px` : `${40 + (yellowPos.faceX || 0)}px`,
+                  top: (password.length > 0 && !showPassword) ? `${88}px` : `${88 + (yellowPos.faceY || 0)}px`,
                 }}
               />
             </div>
